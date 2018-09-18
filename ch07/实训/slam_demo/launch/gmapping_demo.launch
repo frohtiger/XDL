@@ -1,0 +1,4 @@
+<launch>
+  <include file="$(find slam_demo)/launch/include/gmapping.launch.xml"/> 
+
+</launch>

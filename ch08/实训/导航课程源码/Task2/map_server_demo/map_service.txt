@@ -1,0 +1,26 @@
+/**********************************************************
+**********   1.test_map.yaml解析   ************************
+**********************************************************/
+
+image: Software_Museum.pgm #地图路径
+resolution: 0.050000  #地图分辨率，米/像素
+origin: [-25.000000, -25.000000, 0.000000]  #最左下角像素在地图中的2d位姿(x,y,yaw)，yaw为偏转(逆时针)，当yaw=0时没有偏转
+negate: 是否对white/black free/occupied语义进行翻转
+occupied_thresh: 0.65  #大于这个阀值占用率的像素被认为occupied
+free_thresh: 0.196  #小于这个阀值占用率的像素被认为是free
+
+/**********************************************************
+**********   2.luanch添加map_service：   ******************
+**********************************************************/
+<launch>
+  <param name="use_sim_time" value="false" />
+
+  <!-- Set the name of the map yaml file: can be overridden on the command line. -->
+  <arg name="map" default="test_map.yaml" />
+
+  <!-- Run the map server with the desired map -->
+
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find
+
+ rbx1_nav)/maps/<your map.yaml file>"/>
+</launch>

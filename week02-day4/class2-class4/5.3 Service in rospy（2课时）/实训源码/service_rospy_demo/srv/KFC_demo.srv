@@ -1,0 +1,5 @@
+string menu
+float64 price
+int64 number
+---
+float64 bill

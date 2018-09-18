@@ -1,0 +1,2 @@
+learning_tf
+-DCATKIN_DEVEL_PREFIX=/home/cwj/practice3_ws/devel -DCMAKE_INSTALL_PREFIX=/home/cwj/practice3_ws/install -G Unix Makefiles

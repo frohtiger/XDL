@@ -1,0 +1,26 @@
+<launch>
+  <!-- 设置两个全局参数test_global和myrobot -->
+
+  <param name="test_global" value="I am a global param" />
+  <param name="myrobot" value="yoyo" />
+       
+  <!-- 创建两个分组并以命名空间标签来区分 --> 
+
+  <group ns="test1">
+    <param name="P" value="200" />
+    <param name="I" value="100" /> 
+    <param name="D" value="50" />   
+ 
+  </group>   
+
+  <group ns="test2">
+    <param name="PP" value="2" />
+    <param name="II" value="1" /> 
+    <param name="DD" value="0.5" />   
+ 
+  </group>  
+  
+  <node pkg="param_rospy_demo" type="param_test.py" name="param_test" output="screen"/>
+ 
+
+</launch>

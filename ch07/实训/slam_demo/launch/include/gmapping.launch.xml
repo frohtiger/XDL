@@ -1,0 +1,42 @@
+<launch>
+  <arg name="scan_topic"  default="scan" />
+  <arg name="base_frame"  default="base_footprint"/>
+  <arg name="odom_frame"  default="odom"/>
+
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <param name="base_frame" value="$(arg base_frame)"/>   <!--底盘坐标系-->
+    <param name="odom_frame" value="$(arg odom_frame)"/>   <!--里程计坐标系-->
+    <param name="map_update_interval" value="1.0"/>        <!--更新时间(s)，每多久更新一次地图，不是频率-->
+    <param name="maxUrange" value="20.0"/>                 <!--激光雷达最大可用距离，在此之外的数据截断不用-->
+    <param name="maxRange" value="25.0"/>                  <!--激光雷达最大距离-->
+    <param name="sigma" value="0.05"/>                     <!--激光辅助搜索的标准偏差-->
+    <param name="kernelSize" value="1"/>                   <!--激光辅助搜索的窗口大小-->
+    <param name="lstep" value="0.05"/>                     <!--初始搜索步骤（平移）-->
+    <param name="astep" value="0.05"/>                     <!--初始搜索步骤（旋转）-->
+    <param name="iterations" value="5"/>                   <!--扫描匹配迭代次数-->
+    <param name="lsigma" value="0.075"/>                   <!--光束似然估计的标准偏差-->
+    <param name="ogain" value="3.0"/>                      <!--似然估计扁平增益-->
+    <param name="lskip" value="0"/>                        <!--在每次扫描中跳过的光束数量-->
+    <param name="minimumScore" value="200"/>               <!--考虑到扫描匹配结果的最低分数-->
+    <param name="srr" value="0.01"/>                       <!--测位误差(平移→ 移动)-->
+    <param name="srt" value="0.02"/>                       <!--测位误差(平移→ 旋转)-->
+    <param name="str" value="0.01"/>                       <!--测位误差(旋转→ 平移)-->
+    <param name="stt" value="0.02"/>                       <!--测位误差(旋转→ 旋转)-->
+    <param name="linearUpdate" value="0.5"/>               <!--处理所需的最小移动距离-->
+    <param name="angularUpdate" value="0.436"/>            <!--处理所需的最小旋转角度-->
+    <param name="temporalUpdate" value="-1.0"/>            <!--如果从最后一次扫描时刻开始超过了此更新时间,则执行扫描。如果这个值小于 0 ,则不使用它。-->
+    <param name="resampleThreshold" value="0.5"/>          <!--重新采样阈值-->
+    <param name="particles" value="80"/>                   <!--粒子滤波器中的粒子数-->
+    <param name="xmin" value="-25.0"/>                     <!--初始地图大小(最小 x )-->
+    <param name="ymin" value="-25.0"/>                     <!--初始地图大小(最小 y )-->
+    <param name="xmax" value="25.0"/>                      <!--初始地图大小(最大 x )-->
+    <param name="ymax" value="25.0"/>                      <!--初始地图大小(最大 y )-->
+
+    <param name="delta" value="0.05"/>                     <!--地图分辨率:距离/像素-->
+    <param name="llsamplerange" value="0.01"/>             <!--似然估计的范围(平移)-->
+    <param name="llsamplestep" value="0.01"/>              <!--似然估计的步幅(平移)-->
+    <param name="lasamplerange" value="0.005"/>            <!--似然估计的范围(旋转)-->
+    <param name="lasamplestep" value="0.005"/>             <!--似然估计的步幅(旋转)-->
+    <remap from="scan" to="$(arg scan_topic)"/>
+  </node>
+</launch>
